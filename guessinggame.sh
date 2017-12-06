@@ -32,18 +32,14 @@ displayText "How many files do you think are in the current working directory? "
 read guess
 
 while (( guess != num_files )); do
-  rand=$(( (RANDOM % 4) + 1))
-  goHigherText=${higherText[$rand]} 
-  goLowerText=${higherText[$rand]} 
-
+  rand=$(( (RANDOM % 4)))
   if (( guess < num_files )); then
-    echo $goHigherText | displayText
+    displayText "${higherText[$rand]}"
     read guess
   elif (( guess > num_files )); then
-    displayText $goLowerText
+    displayText "${lowerText[$rand]}"
     read guess
   fi
 done
 
-displayText "Correct! there are $num_files in this directory 🎉🎉🎉🎉🎉"
-
+displayText "Correct! there are $guess in this directory 🎉"
