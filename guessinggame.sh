@@ -2,11 +2,19 @@
 local num_files=$(ls -1 | wc -l)
 
 # welcome the user
-  while (( key == "" )); do
-    displayText 'Welcome to G.G. otherwise known as the Guessing Game'
-  sleep 0.5
-  displayText "Press enter to continue"
-  read -p "How many files do you think are in the current working directory? " guess
+  displayText 'Welcome to G.G. otherwise known as the Guessing Game'
+  pause "Press enter to continue"
+  displayText "How many files do you think are in the current working directory? "
+  read guess
+  while (( guess != num_files )); do
+    if (( guess < num_files )); then
+      displayText "Not quite. Guess higher."
+      read guess
+    elif (( guess > num_files )); then
+      displayText "Too high. Try again"
+      read guess
+    fi
+  done
 
 echo $guess
 # prompt the user to guess the number of files
@@ -18,10 +26,8 @@ function displayText {
     echo -n "${text:$i:1}"
     sleep 0.05
   done
-
-  echo -e "\n"
 }
 
-function pause {
+function pause() {
   read -p "$*"
 }
