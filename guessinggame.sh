@@ -2,9 +2,11 @@
 local num_files=$(ls -1 | wc -l)
 
 # welcome the user
-displayText 'Welcome to G.G.'
-sleep 1
-read -p "How many files do you think are in the current working directory? " guess
+  while (( key == "" )); do
+    displayText 'Welcome to G.G. otherwise known as the Guessing Game'
+  sleep 0.5
+  displayText "Press enter to continue"
+  read -p "How many files do you think are in the current working directory? " guess
 
 echo $guess
 # prompt the user to guess the number of files
@@ -18,4 +20,8 @@ function displayText {
   done
 
   echo -e "\n"
+}
+
+function pause {
+  read -p "$*"
 }
